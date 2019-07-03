@@ -1,0 +1,188 @@
+//
+//  Zhongtou.pch
+//  ZhongTou
+//
+//  Created by Jone on 2017/7/18.
+//  Copyright © 2017年 Jone. All rights reserved.
+//
+
+#ifndef Zhongtou_pch
+#define Zhongtou_pch
+#import "PureLayout.h"
+#import "Macro.h"
+//颜色
+#import "SavaInfoTools.h"
+#import "MJRefresh.h"
+
+#define knotificationChangeVC       @"knotificationChangeVC"
+
+#define knotificationRefleshListData       @"knotificationRefleshListData"
+
+#define RGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+#define HexRGBAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
+
+#define NavigationBarColor [UIColor colorWithRed:233/255.0 green:118/255.0 blue:20/255.0 alpha:1]
+#define NavigationBarShadowColor [UIColor blackColor]
+#define NavigationBarWidth screen_width
+#define NavigationBarHeight 64
+
+#define NavigationBarTitleFont [UIFont systemFontOfSize:16*KWIDTH]
+#define NavigationBarTitleColor BlackCustomColor
+
+
+
+
+#define Content_Y 64
+#define Header_Y 55
+#define Content_Height [[UIScreen mainScreen] bounds].size.height-64
+#define app_version  @"1.0"
+
+#define TabBar_Height 50
+//屏幕的宽
+#define screen_width [UIScreen mainScreen].bounds.size.width
+//屏幕的高
+#define screen_height [UIScreen mainScreen].bounds.size.height
+//屏幕尺寸比
+#define SCREEN_RATIO [UIScreen mainScreen].bounds.size.width/320.0
+
+#define SCREEN_RATIO_IPHONE6 [UIScreen mainScreen].bounds.size.width/375.0
+
+#define ISIPHONE6PLUS (([UIScreen mainScreen].bounds.size.width==414)?(YES):(NO))
+#define ISIPHONE6 (([UIScreen mainScreen].bounds.size.width>320)?(YES):(NO))
+#define ISIPHONE4 (([UIScreen mainScreen].bounds.size.height == 480)?(YES):(NO))
+#define ISIPHONE5 (([UIScreen mainScreen].bounds.size.height == 568)?(YES):(NO))
+
+#define KWIDTH screen_width/375
+#define KHeight screen_height/568
+#define lineHight 0.5
+
+#define versionNo  1
+
+//图片缓存的最大缓存量
+#define image_max_cache_size 500 * 1024 * 1024
+//内存大小
+#define memory_capacity 4 * 1024 * 1024
+//物理内存大小
+#define disk_capacity 20 * 1024 * 1024
+
+#define url_go_to_iTunes @"https://itunes.apple.com/cn/zou/id5129158?mt=8"
+
+#define BPushAppKey @"YafMMHeXRjkyutk00q3R6WeR"
+
+#define buttonBgColor  HexRGBAlpha(0x4e6cef,1)
+
+#define buttonBgCancelColor  HexRGBAlpha(0xBFBFBF,1)
+
+
+#define navigationBarColor HexRGBAlpha(0x5677fc,1)
+
+#define titleColor HexRGBAlpha(0xffffff,1)
+
+#define lineBgColor HexRGBAlpha(0x3d4750,1)
+
+#define titleMeColor HexRGBAlpha(0x292a2a,1)
+
+#define titleResignColor HexRGBAlpha(0x3893f9,1)
+
+
+#define fontPingFang @"PingFangSC-Regular"
+#define tableCellLineColor HexRGBAlpha(0xededed,1)
+
+//navBar文字颜色
+#define navbar_titletext_color RGBColor(51,51,51)
+#define BlackCustomColor    HexRGBAlpha(0x464646,1)
+
+#define buyDetailBackColor HexRGBAlpha(0xf5f5f5,1)
+
+#define titleBuyDetail HexRGBAlpha(0x0A0909,1)
+#define titleBuyHeader HexRGBAlpha(0x272323,1)
+#define titleBuyHeaderDetail HexRGBAlpha(0x4e6cef,1)
+#define titleLightTitle HexRGBAlpha(0x747272,1)
+
+
+//#f6f6f6
+
+#define sizeWithText(text,attribute,maxSize) [text boundingRectWithSize:maxSize options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size
+
+
+#define systemVersionGreaterOrEqualThan(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
+
+
+#ifndef weakify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+#endif
+#endif
+#endif
+
+#ifndef strongify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
+
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define NSLog(...)
+#define debugMethod()
+#endif
+
+
+#ifndef weakify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#else
+#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+#endif
+#endif
+#endif
+
+#ifndef strongify
+#if DEBUG
+#if __has_feature(objc_arc)
+#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* Zhongtou_pch */

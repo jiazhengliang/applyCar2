@@ -1,0 +1,8 @@
+platform :ios, '8.0'
+target ‘ZhongTou’ do
+#pod 'FMDB'
+#pod 'AFNetworking'
+pod 'SDWebImage'
+#pod 'BaiduMapKit'
+#pod 'Bugly'
+end
